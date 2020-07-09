@@ -20,7 +20,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
     console.log('Online!');
 
-    client.user.setActivity('R-Roi?? 😳', { type: 'LISTENING' })
+    client.user.setActivity('R-Roi?? 😳😳  [!help]', { type: 'LISTENING' })
 
 }); //end client.once ready
 
@@ -33,8 +33,8 @@ client.on('message', message => {
 
     /*
         Get the user command "![command]"
-    */
-    const args = message.content.slice(PREFIX.length).split(/ +/);
+    */ 
+    var args = message.content.slice(PREFIX.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName)
