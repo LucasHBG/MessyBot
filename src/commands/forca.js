@@ -5,7 +5,7 @@ function getWord(){
 }
 
 function startGame(msg, word, lifes = 6){
-
+	const letrasValidas = [ ...new Set( word.split(/ +/).join("").split("") ) ].sort();
 }
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
 	//TODO Lukas: ajeita esse usage ai
 	usage: 'start | <chute> | skip | stop | custom',
     execute(message, args) {
-		if(args[0] == 'start'){
+		if(!args.length){
 			startGame(message, getWord())
 		}
     },
@@ -26,8 +26,9 @@ module.exports = {
 1.1 - Leitura Respostas
 1.2 - Validação de Vida
 1.3 - Perder
-2 - Comando Custom Funcional
-3 - Comando de Chute Funcional
+2 - Comando de Chute Funcional
+3 - Comando Skip / Stop
+4 - Comando Custom Funcional
 
 
 */
