@@ -4,6 +4,9 @@ function getWord(){
 	return dicio[Math.floor(Math.random() * dicio.length)];
 }
 
+function startGame(msg, word, lifes = 6){
+
+}
 
 module.exports = {
     name: 'forca',
@@ -13,7 +16,7 @@ module.exports = {
 	usage: 'start | <chute> | skip | stop | custom',
     execute(message, args) {
 		if(args[0] == 'start'){
-			
+			startGame(message, getWord())
 		}
     },
 };
