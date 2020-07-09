@@ -1,0 +1,26 @@
+{
+  "name": "messybot",
+  "version": "1.0.0",
+  "description": "Discord bot for shitposting and spam maybe",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukaHBG/MessyBot.git"
+  },
+  "author": "Lucas & Filipe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukaHBG/MessyBot/issues"
+  },
+  "homepage": "https://github.com/LukaHBG/MessyBot#readme"
+}
