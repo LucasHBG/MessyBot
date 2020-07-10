@@ -21,7 +21,7 @@ module.exports = {
 
 		if (!args.length) {
 			data.push('Aqui está uma lista com todos os meus comandos em !forca:');
-			data.push('**' + commands.map(command => ' -> !' + command).join(', \n') + '**');
+			data.push('**' + commands.map(command => ' -> !forca ' + command).join(', \n') + '**');
 
 			return message.channel.send(data, { split: true });
 		}
