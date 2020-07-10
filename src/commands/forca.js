@@ -113,11 +113,11 @@ function startGame(msg, word, lifes = 6) {
 				if(reason == 'idle') message.channel.send(`Parece que esqueceram de tentar adivinhar a palavra **${word}**...`);
 				else collected.last().reply(reason.endsWith('Stop') ? `Desistiu de Tentar descobrir a palavra "**${word}**" foi?` : `Ih, parece que alguem não conhece a palavra "**${word}**"`).then(m => m.react('725928709856559144'));
 			}
-			// se for vitória, enviar resposta
+			// Se for vitória, enviar resposta
 			else {
 				collected.last().reply((reason.endsWith('Simple') ? 'Acertou a ultima  de "' : 'Acertou a palavra "**') + word + '**"!');
 			}
-			// mostrar palavra no resultado
+			// Mostrar palavra no resultado
 			censoredWord = word.split('').join(' ');
 			// Atualizar mensagem original com alterações feitas anteriormente
 			embed = embed.setDescription(`Vidas: ${healths}\nPalavra(${word.split('-').join('').split(/ +/).join('').length}): \`${censoredWord.split('').join(' ')}\`\nLetras Erradas: \`${chutes.length == 0 ? '...' : chutes.join(', ')}\``);
