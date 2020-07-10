@@ -54,7 +54,7 @@ function startGame(msg, word, lifes = 6) {
 						if(element === removerAcento(m.content)) censoredWord[i] = word.split('')[i];
 					}
 					censoredWord = censoredWord.join('');
-					if(censoredWord.split(' ').join('').split('_').join().length == word.split(' ').join('').length) collector.stop('ganhou');
+					if(censoredWord.split(' ').join('').split('_').join('').length == word.split(' ').join('').length) collector.stop('ganhou');
 				}
 				else if(!chutes.some(value => value === removerAcento(m.content).toUpperCase())) {
 					chutes.push(removerAcento(m.content).toUpperCase());
