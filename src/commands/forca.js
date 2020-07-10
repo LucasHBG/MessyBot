@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const { dicio } = require('./dicio.json');
 
 function getWord(){
@@ -5,7 +6,12 @@ function getWord(){
 }
 
 function startGame(msg, word, lifes = 6){
-	const letrasValidas = [ ...new Set( word.split(/ +/).join("").split("") ) ].sort();
+	const letrasValidas = [ ...new Set( word.split('-').join('').split(/ +/).join('').split('') ) ].sort();  
+	let censoredWord = word.split(/[a-zA-Z]/).join('_ ');
+	const embed = new Discord.MessageEmbed()
+	.setTitle('Jogo da Forca')
+	.setAuthor('🌪 Ablablublé 🌪', 'https://cdn.discordapp.com/avatars/730761005659062282/03a2685c6e38459264a965edf583459f.png')
+	msg.channel.send({ embed: embed })
 }
 
 module.exports = {
