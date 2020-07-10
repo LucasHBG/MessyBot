@@ -41,7 +41,7 @@ function startGame(msg, word, lifes = 6) {
 		.setDescription(`Vidas: ${healths}\nPalavra(${word.split('-').join('').split(/ +/).join('').length}):\`${censoredWord.split('').join(' ')}\`\nLetras Erradas:${chutes}`);
 
 	msg.channel.send({ embed: embed }).then(message => {
-		const collector = msg.channel.createMessageCollector(filter, { max: 100 });
+		const collector = msg.channel.createMessageCollector(filter, { max: 100, idle: 60000});
 		collector.on('collect', m => {
 
 			if(m.content === 'stop') {collector.stop('tilt');}
