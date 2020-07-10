@@ -86,7 +86,7 @@ function startGame(msg, word, lifes = 6) {
 				healths = fixHealths(lifes, lifes);
 
 				if(reason == 'idle') message.channel.send(`Parece que esqueceram de tentar adivinhar a palavra **${word}**...`);
-				else collected.last().reply(reason.endsWith('Stop') ? `Desistiu de Tentar descobrir a palavra "**${word}**" foi?` : `Ih, parece que alguem não conhece a palavra "**${word}**"`).then(m => m.react('<:KEKW:725928709856559144>'));
+				else collected.last().reply(reason.endsWith('Stop') ? `Desistiu de Tentar descobrir a palavra "**${word}**" foi?` : `Ih, parece que alguem não conhece a palavra "**${word}**"`).then(m => m.react('725928709856559144'));
 			}
 			else {
 				collected.last().reply((reason.endsWith('Simple') ? 'Acertou a ultima  de "' : 'Acertou a palavra "**') + word + '**"!');
