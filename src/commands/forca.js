@@ -17,7 +17,6 @@ function removerAcento(text) {
 }
 
 function startGame(msg, word, lifes = 6) {
-	word = 'mel agrário';
 	const wordFixed = removerAcento(word);
 	const gabarito = [ ...new Set(wordFixed.split('-').join('').split(/ +/).join('').split('')) ].sort();
 	let censoredWord = wordFixed.split(/[a-zA-Z]/).join('_');
