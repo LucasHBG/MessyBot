@@ -5,20 +5,31 @@ function getWord() {
 	return dicio[Math.floor(Math.random() * dicio.length)];
 }
 
-function startGame(msg, word, lifes = 6){
-	const letrasValidas = [ ...new Set( word.split('-').join('').split(/ +/).join('').split('') ) ].sort();  
-	let censoredWord = word.split(/[a-zA-Z]/).join('_ ');
+async function startGame(msg, word, lifes = 6) {
+	const letrasValidas = [ ...new Set(word.split('-').join('').split(/ +/).join('').split('')) ].sort();
+	const censoredWord = word.split(/[a-zA-Z]/).join('_ ');
+	const lostHealth = 0;
+	let healths = '';
+	const chutes = '';
+
+	for (let i = 0; i < lifes; i++) {
+		healths += (i >= lifes - lostHealth) ? '♥️' : '🖤';
+	}
+
 	const embed = new Discord.MessageEmbed()
-	.setTitle('Jogo da Forca')
-	.setAuthor('🌪 Ablablublé 🌪', 'https://cdn.discordapp.com/avatars/730761005659062282/03a2685c6e38459264a965edf583459f.png')
-	msg.channel.send({ embed: embed })
+		.setColor('#87CEEB')
+		.setTitle('Jogo da Forca')
+		.setAuthor('🌪 Ablablublé 🌪', 'https://cdn.discordapp.com/avatars/730761005659062282/03a2685c6e38459264a965edf583459f.png')
+		.setDescription(`Vidas: ${healths}\nLetras Erradas:${chutes}`);
+
+	msg.channel.send({ embed: embed });
 }
 
 module.exports = {
 	name: 'forca',
 	description: 'Começa um jogo da forca.',
 	aliases: ['hangman', 'fc'],
-	//TODO Lukas: ajeita esse usage ai
+	// TODO Lukas: ajeita esse usage ai
 	usage: 'start | <chute> | skip | stop | custom',
 	execute(message, args) {
 
@@ -33,7 +44,7 @@ module.exports = {
 		}
 
 		if (args[1] === 'start') {
-			startGame(message, getWord())
+			startGame(message, getWord());
 		}
 		if (args[1] === 'stop') {
 			message.channel.send('Game over');
@@ -41,7 +52,7 @@ module.exports = {
 	},
 };
 
-/*TODO Geral
+/* TODO Geral
 1 - Comando Start Funcional
 1.1 - Leitura Respostas
 1.2 - Validação de Vida
