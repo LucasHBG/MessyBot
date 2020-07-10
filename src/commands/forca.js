@@ -17,7 +17,6 @@ function removerAcento(text) {
 }
 
 function startGame(msg, word, lifes = 6) {
-	word = 'mel agrário';
 	const wordFixed = removerAcento(word);
 	const gabarito = [ ...new Set(wordFixed.split('-').join('').split(/ +/).join('').split('')) ].sort();
 	let censoredWord = wordFixed.split(/[a-zA-Z]/).join('_');
@@ -66,11 +65,7 @@ function startGame(msg, word, lifes = 6) {
 			for (let i = 0; i < lifes; i++) {
 				healths += (i < lifes - chutes.length) ? '♥️' : '🖤';
 			}
-			embed = new Discord.MessageEmbed()
-				.setColor('#87CEEB')
-				.setTitle('Jogo da Forca')
-				.setAuthor('🌪 Ablablublé 🌪', 'https://cdn.discordapp.com/avatars/730761005659062282/03a2685c6e38459264a965edf583459f.png')
-				.setDescription(`Vidas: ${healths}\nPalavra(${word.split('-').join('').split(/ +/).join('').length}):\`${censoredWord.split('').join(' ')}\`\nLetras Erradas:${chutes}`);
+			embed = embed.setDescription(`Vidas: ${healths}\nPalavra(${word.split('-').join('').split(/ +/).join('').length}):\`${censoredWord.split('').join(' ')}\`\nLetras Erradas:${chutes}`);
 			message.edit({ embed: embed });
 		});
 		collector.on('end', reason => {
