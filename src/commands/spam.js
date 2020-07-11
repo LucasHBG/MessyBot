@@ -3,7 +3,7 @@ module.exports = {
     description: 'Mencione um membro pra spammar no PV dele.',
     usage: '[numero de mensagens] [url]',
     guildOnly: true,
-    execute(message, args) {
+    async execute(message, args) {
 
         console.log(args);
         var value = 0;
@@ -22,8 +22,11 @@ module.exports = {
                     console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
                     msgSuccecess = !msgSuccecess;
                 });
-            if(args[2] !== 'undefined') taggedUser.send({
-                files: ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Ffacebook%2F000%2F024%2F207%2Fbrainlettttt.jpg&f=1&nofb=1']
+            if (args[2] !== 'undefined') await taggedUser.send({
+                files: ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Foriginal%2F000%2F024%2F207%2Fbrainlettttt.jpg&f=1&nofb=1']
+            }).catch(err => {
+                console.error(`Não consegui enviar imagem no PV para ${message.author.tag}.\n`, error);
+                msgSuccecess = !msgSuccecess;
             })
         }
 
