@@ -1,7 +1,7 @@
 module.exports = {
     name: 'spam',
     description: 'Mencione um membro pra spammar no PV dele.',
-    usage: '[numero de mensagens]',
+    usage: '[numero de mensagens] [url]',
     guildOnly: true,
     execute(message, args) {
 
@@ -21,6 +21,7 @@ module.exports = {
                     console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
                     msgSuccecess = !msgSuccecess;
                 });
+            new MessageAttachment(url);
         }
 
         if (!msgSuccecess)

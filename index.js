@@ -20,7 +20,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
     console.log('Online!');
 
-    client.user.setActivity('R-Roi?? 😳😳  [!help]', { type: 'LISTENING' })
+    client.user.setActivity('R-Roi?? 😳😳 [!help]', { type: 'LISTENING' })
 
 }); //end client.once ready
 
