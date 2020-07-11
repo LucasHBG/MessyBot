@@ -31,9 +31,7 @@ function removerAcento(text) {
 function startGame(msg, word, lifes = 6) {
 	// Palavra sem Acentos
 	const wordFixed = removerAcento(word);
-	// Respostas que são válidas de acordo com a palavra
-	const gabarito = [ ...new Set(wordFixed.split('-').join('').split(/ +/).join('').split('')) ].sort();
-	// Palavra com letras substituidas por _
+	const gabarito = [...new Set(wordFixed.split('-').join('').split(/ +/).join('').split(''))].sort();
 	let censoredWord = wordFixed.split(/[a-zA-Z]/).join('_');
 	// Lista para as Falhas
 	const chutes = [];
@@ -71,14 +69,13 @@ function startGame(msg, word, lifes = 6) {
 					censoredWord = censoredWord.split('');
 					for (let i = 0; i < censoredWord.length; i++) {
 						const element = wordFixed.split('')[i];
-						if(element === removerAcento(m.content)) censoredWord[i] = word.split('')[i];
+						if (element === removerAcento(m.content)) censoredWord[i] = word.split('')[i];
 					}
 					censoredWord = censoredWord.join('');
 					// Caso seja a ultima letra, ganhar com retorno 'winSimple'
 					if(censoredWord.split(' ').join('').split('_').join('').length == word.split(' ').join('').length) collector.stop('winSimple');
 				}
-				// Caso a letra não é uma do gabarito, e não foi mandada anteriormente, adicionar como 'chute'
-				else if(!chutes.some(value => value === removerAcento(m.content).toUpperCase())) {
+				else if (!chutes.some(value => value === removerAcento(m.content).toUpperCase())) {
 					chutes.push(removerAcento(m.content).toUpperCase());
 					if(chutes.length >= lifes) collector.stop('lostLifes');
 				}
