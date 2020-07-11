@@ -5,6 +5,7 @@ module.exports = {
     guildOnly: true,
     execute(message, args) {
 
+        console.log(args);
         var value = 0;
         args = (typeof args[1] === 'undefined') ? value = 5 : value = parseInt(args[1]);
 
@@ -21,11 +22,13 @@ module.exports = {
                     console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
                     msgSuccecess = !msgSuccecess;
                 });
-            new MessageAttachment(url);
+            if(args[2] !== 'undefined') taggedUser.send({
+                files: ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Ffacebook%2F000%2F024%2F207%2Fbrainlettttt.jpg&f=1&nofb=1']
+            })
         }
 
         if (!msgSuccecess)
-            message.reply(`parace que não consigo enviar mensagens para **${taggedUser.username}** no PV!`);
+            message.reply(`parece que não consigo enviar mensagens para **${taggedUser.username}** no PV!`);
 
         message.channel.send(`⚠ Spam enviado ⚠`);
     },
