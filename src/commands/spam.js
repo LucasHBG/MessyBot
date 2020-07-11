@@ -3,7 +3,7 @@ module.exports = {
     description: 'Mencione um membro pra spammar no PV dele.',
     usage: '[numero de mensagens] [url]',
     guildOnly: true,
-    async execute(message, args) {
+    execute(message, args) {
 
         console.log(args);
         var value = 0;
@@ -16,18 +16,25 @@ module.exports = {
         const taggedUser = message.mentions.users.first();
         var msgSuccecess = true;
 
-        for (let index = 0; index < value; index++) {
-            taggedUser.send('R-Roi?? 😳😳')
-                .catch(error => {
-                    console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
-                    msgSuccecess = !msgSuccecess;
-                });
-            if (args[2] !== 'undefined') await taggedUser.send({
-                files: ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Foriginal%2F000%2F024%2F207%2Fbrainlettttt.jpg&f=1&nofb=1']
-            }).catch(err => {
-                console.error(`Não consegui enviar imagem no PV para ${message.author.tag}.\n`, error);
-                msgSuccecess = !msgSuccecess;
-            })
+        const spamLoop = async _ => {
+            for (let index = 0; index < value; index++) {
+
+                await taggedUser.send('R-Roi?? 😳😳')
+                    .catch(error => {
+                        console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
+                        msgSuccecess = !msgSuccecess;
+                    });
+
+                if (args[2] !== 'undefined')
+                    await taggedUser.send({
+                        files: ['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Foriginal%2F000%2F024%2F207%2Fbrainlettttt.jpg&f=1&nofb=1']
+                    })
+                        .then(console.log)
+                        .catch(error => {
+                            console.error(`Não consegui enviar imagem no PV para ${message.author.tag}.\n`, error);
+                            msgSuccecess = !msgSuccecess;
+                        })
+            }
         }
 
         if (!msgSuccecess)
