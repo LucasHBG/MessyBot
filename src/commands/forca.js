@@ -130,7 +130,7 @@ module.exports = {
 	description: 'Começa um jogo da forca.',
 	aliases: ['hangman', 'fc'],
 	// TODO Lukas: ajeita esse usage ai
-	usage: 'start | <chute> | skip | custom',
+	usage: 'start | <chute> | skip | stop',
 	execute(message, args) {
 		const data = [];
 		const commands = ['start', '<chute>', 'skip', 'stop'];
