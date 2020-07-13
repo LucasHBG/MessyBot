@@ -3,7 +3,7 @@ const { PREFIX } = process.env
 module.exports = {
     name: 'help',
     description: 'Informa sobre as funcionalidades do bot.',
-    aliases: ['commands', 'ajuda', 'comandos'],
+    aliases: ['commands', 'ajuda', 'comandos', 'menu'],
     usage: '[nome do comando]',
     execute(message, args) {
 
