@@ -112,7 +112,7 @@ function startGame(msg, word, lifes = 6) {
 			}
 			// Se for vitória, enviar resposta
 			else {
-				collected.last().reply((reason.endsWith('Simple') ? 'Acertou a ultima  de "' : 'Acertou a palavra "**') + word + '**"!');
+				collected.last().reply((reason.endsWith('Simple') ? 'Acertou a ultima  de "**' : 'Acertou a palavra "**') + word + '**"!');
 			}
 			// Mostrar palavra no resultado
 			censoredWord = word.split('').join(' ');
