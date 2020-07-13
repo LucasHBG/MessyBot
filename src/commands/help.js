@@ -11,8 +11,8 @@ module.exports = {
         const { commands } = message.client;
 
         if (!args.length) {
-            data.push('Aqui está uma lista com todos os meus comandos:');
-            data.push('**' + commands.map(command => ' -> !' + command.name).join(', \n') + '**');
+            data.push('Aqui está uma lista com todos os meus comandos de ajuda:');
+            data.push('**' + commands.map(command => ' -> !help ' + command.name).join(', \n') + '**');
             data.push(`Você também pode enviar \`${PREFIX}help [nome do comando]\` para ter informações sobre um comando!`);
 
             return message.channel.send(data, { split: true });
