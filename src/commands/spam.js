@@ -5,13 +5,17 @@ module.exports = {
     guildOnly: true,
     async execute(message, args) {
 
+        var msgSuccecess = true;
         var value = Number.isNaN(parseInt(args[1])) ? 5 : parseInt(args[1]);
 
         if (!message.mentions.users.size)
             return message.reply('você precisa marcar um usuário antes de spammar ele!');
 
         const taggedUser = message.mentions.users.first();
-        var msgSuccecess = true;
+
+        if (taggedUser.id === '339177005515931669') {
+            return message.reply('🛡 Não posso interromper meu criador 🛡');
+        }
 
         var text = args.slice(2, args.length).join(' ');
         text = (text.length > 0) ? text : 'R-Roi?? 😳😳';
