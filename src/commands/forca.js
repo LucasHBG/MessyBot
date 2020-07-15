@@ -115,7 +115,7 @@ function startGame(msg, word, lifes = 6) {
 				collected.last().reply((reason.endsWith('Simple') ? 'Acertou a ultima  de "**' : 'Acertou a palavra "**') + word + '**"!');
 			}
 			// Mostrar palavra no resultado
-			censoredWord = word.split('').join(' ');
+			censoredWord = word;
 			// Atualizar mensagem original com alterações feitas anteriormente
 			embed = embed.setDescription(`Vidas: ${healths}\nPalavra(${word.split('-').join('').split(/ +/).join('').length}): \`${censoredWord.split('').join(' ')}\`\nLetras Erradas: \`${chutes.length == 0 ? '...' : chutes.join(', ')}\``);
 			message.edit({ embed: embed });
