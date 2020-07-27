@@ -4,7 +4,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 require('dotenv').config();
-const { DISCORD_TOKEN, PREFIX } = process.env
+const { DISCORD_TOKEN_MESSY, DISCORD_TOKEN_JOTARO_KUJO, PREFIX } = process.env
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -16,6 +16,8 @@ for (const file of commandFiles) {
     const command = require(`./src/commands/${file}`);
     client.commands.set(command.name, command);
 }
+
+
 
 client.once('ready', () => {
     console.log('Online!');
@@ -31,10 +33,12 @@ client.on('message', message => {
 
     if (message.author == client.user) return;
 
+    //getGuild(message);
+
     /*
         Get the user command "![command]"
-    */ 
-    var args = message.content.slice(PREFIX.length).split(/ +/);
+    */
+    var args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName)
@@ -66,4 +70,7 @@ client.on('message', message => {
 });
 
 // login to Discord with your app's token
-client.login(DISCORD_TOKEN).catch(err => console.log("" + err));
+client.login(DISCORD_TOKEN_MESSY).catch(err => console.log("" + err));
+
+// login to Discord with your app's token
+//client.login(DISCORD_TOKEN_JOTARO_KUJO).catch(err => console.log("" + err));
