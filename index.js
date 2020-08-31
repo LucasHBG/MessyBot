@@ -33,8 +33,6 @@ client.on('message', message => {
 
     if (message.author == client.user) return;
 
-    //getGuild(message);
-
     /*
         Get the user command "![command]"
     */
