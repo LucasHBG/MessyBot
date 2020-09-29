@@ -69,6 +69,3 @@ client.on('message', message => {
 
 // login to Discord with your app's token
 client.login(DISCORD_TOKEN_MESSY).catch(err => console.log("" + err));
-
-// login to Discord with your app's token
-//client.login(DISCORD_TOKEN_JOTARO_KUJO).catch(err => console.log("" + err));
