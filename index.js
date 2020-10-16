@@ -4,7 +4,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 require('dotenv').config();
-const { DISCORD_TOKEN_MESSY, DISCORD_TOKEN_JOTARO_KUJO, PREFIX } = process.env
+const { DISCORD_TOKEN_MESSY, PREFIX } = process.env
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -32,7 +32,7 @@ client.on('message', message => {
     if (message.author.bot) return;
 
     if (message.author == client.user) return;
-
+    
     /*
         Get the user command "![command]"
     */
