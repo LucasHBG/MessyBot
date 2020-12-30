@@ -1,68 +1,78 @@
-const Discord = require('discord.js');
-
-async function messageAll(guildMembers, text) {
-
-    for (let index = 0; index < guildMembers.length; index++) {
-        
-        if (!guildMembers[index].user.bot)
-            (guildMembers[index].user).send(text);
-    }
+function messageAll(guildMembers, text) {
+  for (let index = 0; index < guildMembers.length; index++) {
+    if (!guildMembers[index].user.bot) guildMembers[index].user.send(text);
+  }
 }
 
-async function GetGuild(message, text) {
-    //var guildID = message.guild.id;
-    var guildMembers;
-    guildMembers = await message.guild.members.fetch().then(gm => gm.map(m => {
-        return m;
-    }));
+function messageRole(guildMembers, text) {}
 
-    messageAll(guildMembers, text);
+async function GetGuild(message, text) {
+  //var guildID = message.guild.id;
+  let guildMembers;
+  guildMembers = await message.guild.members.fetch().then((gm) =>
+    gm.map((m) => {
+      return m;
+    })
+  );
+
+  messageAll(guildMembers, text);
 }
 
 module.exports = {
-    name: 'spam',
-    description: 'Mencione um membro ou seu cargo pra spammar no PV dele.',
-    usage: '[numero de mensagens] [texto personalizado]',
-    guildOnly: true,
-    async execute(message, args) {
+  name: "spam",
+  description:
+    "Mencione um membro ou seu cargo pra spammar no PV dele.\nExemplo 1 - mencionando um usuário: *!spam @usuario 5 Oi Amigo*\nExemplo 2 - mencionando todos membros de um cargo: *!spam @nomecargo 5 Vamos jogar!!!*",
+  usage: "@[cargo ou membro] [numero de mensagens] [texto personalizado]",
+  guildOnly: true,
+  async execute(message, args) {
+    let msgSuccess = true;
+    let value = Number.isNaN(parseInt(args[1])) ? 5 : parseInt(args[1]);
 
-        var msgSuccecess = true;
-        var value = Number.isNaN(parseInt(args[1])) ? 5 : parseInt(args[1]);
+    if (message.mentions.everyone) {
+      let text = args.slice(1, args.length).join(" ");
+      text = text.length > 0 ? text : "R-Roi?? 😳😳";
 
-        if (message.mentions.everyone === true) {
+      GetGuild(message, text);
+    }
 
-            var text = args.slice(1, args.length).join(' ');
-            text = (text.length > 0) ? text : 'R-Roi?? 😳😳';
+    if (!message.mentions.users.size && !message.mentions.everyone)
+      return message.reply(
+        "você precisa marcar um usuário ou cargo antes de spammar ele!"
+      );
 
-            GetGuild(message, text);
-        }
+    if (!message.mentions.users.size && message.mentions.everyone) return;
 
-        if (!message.mentions.users.size && message.mentions.everyone === false)
-            return message.reply('você precisa marcar um usuário ou seu cargo antes de spammar ele!');
+    //Vetor de usuários mencionados
+    const taggedUser = message.mentions.users.map((users) => {
+      return users;
+    });
 
-        if (!message.mentions.users.size && message.mentions.everyone === true) return;
+    if (value > 500) {
+      message.reply(
+        "Reduzi o número de mensagens para 500, pois o limite máximo foi alcançado!"
+      );
+    }
 
-        const taggedUser = message.mentions.users.first();
+    var text = args.slice(2, args.length).join(" ");
+    text = text.length > 0 ? text : "R-Roi?? 😳😳";
 
-        if (value > 1000) {
-            message.reply('Reduzi o número de mensagens para 1000, pois o limite máximo[1000] foi alcançado!');
-        }
+    for (let index = 0; index < value; index++) {
+      for (i = 0; i < taggedUser.length; i++)
+        msgSuccess = await sendSpam(taggedUser[i], text, msgSuccess);
+    }
 
-        var text = args.slice(2, args.length).join(' ');
-        text = (text.length > 0) ? text : 'R-Roi?? 😳😳';
-
-        for (let index = 0; index < value; index++) {
-
-            await taggedUser.send(text)
-                .catch(error => {
-                    console.error(`Não consegui enviar no PV para ${message.author.tag}.\n`, error);
-                    msgSuccecess = !msgSuccecess;
-                });
-
-        }
-
-        msgSuccecess ?
-            message.channel.send(`⚠ Spam enviado ⚠`) :
-            message.reply(`parece que não consigo enviar mensagens para **${taggedUser.username}** no PV!`);
-    },
+    msgSuccess
+      ? message.channel.send(`⚠ Spam enviado ⚠`)
+      : message.reply(
+          `parece que não consigo enviar mensagens para **${taggedUser.username}** no PV!`
+        );
+  },
 };
+
+async function sendSpam(taggedUser, text, msgSuccess) {
+  await taggedUser.send(text).catch((error) => {
+    console.log(error);
+    msgSuccess = !msgSuccess;
+  });
+  return msgSuccess;
+}
