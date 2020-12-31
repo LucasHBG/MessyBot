@@ -36,7 +36,7 @@ client.on('message', message => {
     /*
         Get the user command "![command]"
     */
-    var args = message.content.slice(PREFIX.length).trim().split(/ +/);
+    let args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName)

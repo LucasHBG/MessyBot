@@ -16,7 +16,7 @@ module.exports = {
             return message.channel.send(data, { split: true });
         }
 
-        var nomeCargo = args.slice(0, args.length).join(' ');
+        let nomeCargo = args.slice(0, args.length).join(' ');
         console.log('Texto: ' + nomeCargo);
         // Create a new role with data and a reason
         message.guild.roles.create({
@@ -33,7 +33,7 @@ module.exports = {
             })
             .catch(console.error);
 
-        var removeCargoSemFantasia = message.member.guild.roles.cache.find((r) => r.name === '👽 Sem fantasia 👽');
+        let removeCargoSemFantasia = message.member.guild.roles.cache.find((r) => r.name === '👽 Sem fantasia 👽');
         message.member.roles.remove(removeCargoSemFantasia)
             .catch(console.error);
     }
