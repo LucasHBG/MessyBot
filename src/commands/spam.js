@@ -16,11 +16,11 @@ async function getGuild(message, text) {
   messageAll(guildMembers, text);
 }
 
-async function sendSpam(taggedUser, text) {
+async function sendSpam(mentionedUser, text) {
   let rejectedUsers = [];
-  await taggedUser.send(text).catch((error) => {
+  await mentionedUser.send(text).catch((error) => {
     console.log(error);
-    rejectedUsers.push(taggedUser.id);
+    rejectedUsers.push(mentionedUser.id);
   });
   return rejectedUsers;
 }
@@ -49,7 +49,7 @@ module.exports = {
     if (!message.mentions.users.size && message.mentions.everyone) return;
 
     //Vetor de usuários mencionados
-    const taggedUser = message.mentions.users.map((users) => {
+    const mentionedUser = message.mentions.users.map((users) => {
       return users;
     });
 
@@ -59,47 +59,44 @@ module.exports = {
       Utiliza do tamanho do vetor de usuários mencionados para determinar
       a posição do argumento com o número de mensagens
     */
-    let value = Number.isNaN(parseInt(args[taggedUser.length]))
+    let repeatValue = Number.isNaN(parseInt(args[mentionedUser.length]))
       ? 5
-      : parseInt(args[taggedUser.length]);
+      : parseInt(args[mentionedUser.length]);
 
-    if (value > 500) {
+    if (repeatValue > 500) {
       message.reply(
         "Reduzi o número de mensagens para 500, pois o limite máximo foi alcançado!"
       );
     }
 
     //Removo os usuários mencionados e o número de mensagens para que nao apareçam na mensagem
-    let text = args.slice(taggedUser.length + 1, args.length).join(" ");
+    let text = args.slice(mentionedUser.length + 1, args.length).join(" ");
     text = text.length > 0 ? text : "R-Roi?? 😳😳";
 
-    for (let index = 0; index < value; index++) {
-      for (i = 0; i < taggedUser.length; i++) {
+    for (let msgIndex = 0; msgIndex < repeatValue; msgIndex++) {
+      for (i = 0; i < mentionedUser.length; i++) {
         if (
           //Verifica se o usuário da lista de rejeitados
-          taggedUser[i].id ==
+          mentionedUser[i].id ==
           rejectedUsers.find((userID) => {
-            if (userID == taggedUser[i].id) return userID;
+            if (userID == mentionedUser[i].id) return userID;
           })
         ) {
           msgSuccess = false;
           continue;
         }
-        rejectedUsers.push(await sendSpam(taggedUser[i], text));
+        rejectedUsers.push(await sendSpam(mentionedUser[i], text));
       }
     }
 
-    // for(i = 0; i < rejectedUsers.length; i++){
-
-    // }
     if (msgSuccess) message.channel.send(`⚠ Spam enviado ⚠`);
     else {
-      if (rejectedUsers.length == taggedUser.length) {
+      if (rejectedUsers.length == mentionedUser.length) {
         message.reply(
           `nenhum spam foi enviado! Não estou conseguindo enviar mensagens no privado deles 😭`
         );
       }
-      if (rejectedUsers.length < taggedUser.length) {
+      if (rejectedUsers.length < mentionedUser.length) {
         message.reply(
           `spam parcialmente enviado! Não consigo enviar mensagens para **${rejectedUsers.length} usuário(s)** no privado 😢!`
         );
